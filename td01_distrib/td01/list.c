@@ -40,6 +40,12 @@ void InsertAtTail(int x)
 {
 	struct Node *temp = head;
 	struct Node *newNode = GetNewNode(x);
+	
+ 	if (head == NULL)
+	{
+		head = newNode;
+		return;
+	}
 	while (temp->next != NULL)
 		temp = temp->next; // Go To last Node
 	temp->next = newNode;

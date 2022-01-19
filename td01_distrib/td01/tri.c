@@ -3,7 +3,7 @@
 
 static void mysort(int a[], int size)
 {
-	int i, j;
+	int i,  j; 
 	int h = 1;
 
 	do
