@@ -19,31 +19,35 @@ tri_%-basicExe.exe: main.o %.o timer.o utils.o unused.o
 	$(CC) -o $@ $^
 
 ####
-## Exercice 3:
-#STATIC_EXE=$(EXE:.exe=-staticExe.exe)
-#
-#tri_%-staticExe.exe: main.o %.o timer.o utils.o unused.o
+# Exercice 3:
+STATIC_EXE=$(EXE:.exe=-staticExe.exe)
+
+tri_%-staticExe.exe: main.o %.o timer.o utils.o unused.o
 #	TODO: écrire la règle permettant de créer un exécutable n'utilisant aucune bibliothèque
+	$(CC) -static -o $@ $^
 
 ####
-## Exercice 4:
-#STATIC_LIB=$(EXE:.exe=-staticLib.exe)
-#
-#tri_%-staticLib.exe: main.o timer.o utils.o libTri_%-staticLib.a
-#	$(CC) -o $@ $^
-#
-#libTri_%-staticLib.a: %.o unused.o
+# Exercice 4:
+STATIC_LIB=$(EXE:.exe=-staticLib.exe)
+
+tri_%-staticLib.exe: main.o timer.o utils.o libTri_%-staticLib.a
+	$(CC) -o $@ $^
+
+libTri_%-staticLib.a: %.o unused.o
 #	TODO: écrire la règle permettant de créer une bibilothèque avec lien statique
+	ar -r $@ $^
+	ranlib $@
 
 ####
-## Exercice 5:
-#DYNAMIC_LIB=$(EXE:.exe=-dynamicLib.exe)
-#
-#tri_%-dynamicLib.exe: main.o timer.o utils.o libTri_%-dynamicLib.so
-#	$(CC) -o $@ $^
-#
-#libTri_%-dynamicLib.so: %.o unused.o
+# Exercice 5:
+DYNAMIC_LIB=$(EXE:.exe=-dynamicLib.exe)
+
+tri_%-dynamicLib.exe: main.o timer.o utils.o libTri_%-dynamicLib.so
+	$(CC) -fpic -o $@ $^
+
+libTri_%-dynamicLib.so: %.o unused.o
 #	TODO: écrire la règle permettant de créer une bibliothqèue dynamique
+	$(CC) -shared -Wl,-soname,$@ -o $@ $^ 
 
 ####
 ## Exercice 7:
@@ -64,7 +68,7 @@ CFLAGS=-Wall -Wextra -std=gnu99 -g -fpic
 SRC=$(wildcard *.c)
 OBJ=$(SRC:.c=.o)
 
-EXE=tri_bubble.exe # tri_insertion.exe tri_merge.exe tri_quick.exe # tri.exe tri_shell.exe
+EXE=tri_bubble.exe tri_insertion.exe tri_merge.exe tri_quick.exe # tri.exe tri_shell.exe
 
 # Si .SECONDARY est défini, permet d'éviter d'effacer les .o générés (ils ne sont plus considérés comme intermédiaires)
 .SECONDARY: $(OBJS)
