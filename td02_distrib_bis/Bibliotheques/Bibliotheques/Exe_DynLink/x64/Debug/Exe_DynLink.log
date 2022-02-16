@@ -1,0 +1,3 @@
+﻿  main.c
+C:\Users\Florian\Documents\GitHub\PNS-S6-ProgSys\td02_distrib_bis\Bibliotheques\Bibliotheques\Exe_DynLink\main.c(2,11): warning C4013: 'PrintStop' non défini(e) ; extern retournant int pris par défaut
+  Exe_DynLink.vcxproj -> C:\Users\Florian\Documents\GitHub\PNS-S6-ProgSys\td02_distrib_bis\Bibliotheques\Bibliotheques\x64\Debug\Exe_DynLink.exe
