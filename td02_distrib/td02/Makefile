@@ -59,6 +59,13 @@ DYNAMIC_LOAD=tri.exe
 #	TODO: écrire la règle permettrant de créer une bibliothèque que l'on charge explicitement
 	$(CC) -rdynamic -o $@ $^ -ldl
 
+####
+# Exercice 8:
+DYNAMIC_LOAD=tri2.exe
+tri2.exe: main_dynload2.o load_library.o timer.o utils.o
+	$(CC) -rdynamic -o $@ $^ -ldl
+	
+
 #---------------------------------------------------------------------------------
 # DO NOT EDIT below this line
 #---------------------------------------------------------------------------------
@@ -75,7 +82,7 @@ EXE=tri_bubble.exe tri_insertion.exe tri_merge.exe tri_quick.exe # tri.exe tri_s
 .SECONDARY: $(OBJS)
 
 # Variable contenant le nom de tous les programmes à générer
-PROGS=$(BASIC_EXE) $(STATIC_EXE) $(STATIC_LIB) $(DYNAMIC_LIB) $(DYNAMIC_LOAD)
+PROGS=$(BASIC_EXE) $(STATIC_EXE) $(STATIC_LIB) $(DYNAMIC_LIB) $(DYNAMIC_LOAD) $(DYNAMIC_LOAD2) 
 
 # Cible générale: génère l'ensemble des programmes spécifiés dans la variable PROGS
 all: $(PROGS)

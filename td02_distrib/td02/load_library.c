@@ -5,13 +5,13 @@
 #include "sort.h"
 
 static void (*sortlib)(int [], int);
+static void *handle;
 
 void sort_from_lib(int tab[], int size){
     sortlib(tab,size);
 }
 
 void load_library(char *library_name){
-    void *handle;
     char *error;
 
     handle = dlopen(library_name, RTLD_LAZY);
@@ -29,4 +29,8 @@ void load_library(char *library_name){
         fprintf(stderr, "%s\n", error);
         exit(EXIT_FAILURE);
     }
+}
+
+void unload_library(){
+    dlclose(handle);
 }
