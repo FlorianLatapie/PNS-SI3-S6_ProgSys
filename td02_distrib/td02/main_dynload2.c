@@ -5,7 +5,6 @@
 #include "sort.h"
 #include "utils.h"
 #include "timer.h"
-
 #include "load_library.h"
 #include <string.h>
 
@@ -37,13 +36,17 @@ int main(int argc, char *argv[])
 {
     /* Décodage des arguments de la ligne de commande */
     Scan_Args(argc, argv);
-    char** libs = malloc(4*sizeof (char*));
-    libs[0] = "libTri_bubble-dynamicLib.so";
-    libs[1] = "libTri_insertion-dynamicLib.so";
-    libs[2] = "libTri_merge-dynamicLib.so";
-    libs[3] = "libTri_quick-dynamicLib.so";
-   
+    char** lib_names = malloc(4 * sizeof(char *));
+    
+     if (!lib_names) {
+        fprintf(stderr, "memory allocation failed (malloc)");
+        exit(EXIT_FAILURE);
+    }
 
+    lib_names[0] = "libTri_bubble-dynamicLib.so";
+    lib_names[1] = "libTri_insertion-dynamicLib.so";
+    lib_names[2] = "libTri_merge-dynamicLib.so";
+    lib_names[3] = "libTri_quick-dynamicLib.so";
     int list[Size_Array];
 
     // Initialize a ramdom list of numbers;
@@ -60,6 +63,7 @@ int main(int argc, char *argv[])
    
     for (int i = 0; i < 4; i++)
     {
+        load_library(lib_names[i]);
         struct timespec vartime = timer_start();
         sort_from_lib(list, Size_Array);
         long time_elapsed_nanos = timer_end(vartime); 
