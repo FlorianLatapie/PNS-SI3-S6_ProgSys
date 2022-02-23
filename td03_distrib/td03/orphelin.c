@@ -7,26 +7,21 @@
 
 int main(int argc, char const *argv[])
 {
-    int nbFils = 10;
 
-    for (int j = 0; j < nbFils; j++)
+    switch (fork())
     {
-        switch (fork())
-        {
-        case -1:
-            perror("fork");
-            exit(1);
-        case 0:
-            for (int k = 0; k < 10; k++)
-            {
-                printf("fils: %d\n", j);
-                sleep(1);
-            }
-            exit(0);
+    case -1:
+        perror("fork");
+        exit(1);
+    case 0:
+        printf("fils: %d, ppid : %d\n", 1, getppid());
+        sleep(2);
+        printf("fils: %d, ppid : %d\n", 1, getppid());
 
-        default:
-            exit(0);
-        }
+        exit(0);
+    default:
+        sleep(1);
     }
+
     return 0;
 }
