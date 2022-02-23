@@ -23,13 +23,12 @@ int main(int argc, char const *argv[])
                 printf("fils: %d\n", j);
             exit(0);
         }
-        
     }
 
     for (int j = 0; j < nbFils; j++)
     {
         wait(NULL);
     }
-    
+
     return 0;
 }
