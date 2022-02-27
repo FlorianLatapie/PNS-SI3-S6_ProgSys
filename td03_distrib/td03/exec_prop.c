@@ -23,7 +23,7 @@ int main()
     
     execlp("./exec_prop-aux.exe", "exec_prop-aux.exe", "coucou", NULL);
 
-    printf("ce buffer sera perdu car après exceclp");
+    printf("ce buffer sera perdu car après exceclp\n");
     // puts("Après execve - pas affiché");
     return 0;
 }
