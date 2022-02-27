@@ -3,6 +3,6 @@
 
 int main(int argc, char* argv[])
 {
-    printf("%d %s\n", getpid(), argv[0]);
+    printf("%d %s\n", getpid(), argv[1]);
     return 0;
 }

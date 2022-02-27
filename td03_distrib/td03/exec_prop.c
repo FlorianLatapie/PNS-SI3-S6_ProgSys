@@ -6,21 +6,22 @@
 
 int main()
 {
-    /*printf("Parent");
-    if (!fork())
+    switch (fork())
     {
-        printf("Enfant");
+    case -1:
+        perror("fork");
+        exit(1);
+    case 0:
+        printf("enfant\n");
+        printf("ceci ne flushe pas");
         exit(0);
+    default:
+        printf("parent\n");
+        printf("ceci ne flushe pas");
     }
-    wait(NULL);
-    puts("Fin");
-
-    puts("Avant execve - affiché");
-
-    printf("Dans buffer - pas affiché car buffers perdus");
-*/
+    printf("ceci ne flushe pas");
     execlp("./exec_prop-aux.exe", "exec_prop-aux.exe", "coucou", NULL);
 
-    //puts("Après execve - pas affiché");
+    // puts("Après execve - pas affiché");
     return 0;
 }
