@@ -13,15 +13,17 @@ int main()
         exit(1);
     case 0:
         printf("enfant\n");
-        printf("ceci ne flushe pas");
         exit(0);
     default:
         printf("parent\n");
-        printf("ceci ne flushe pas");
     }
-    printf("ceci ne flushe pas");
+
+    printf("pid parent : %d\n", getpid());
+    printf("ce buffer sera perdu car il n'y a pas de \\n à la fin");
+    
     execlp("./exec_prop-aux.exe", "exec_prop-aux.exe", "coucou", NULL);
 
+    printf("ce buffer sera perdu car après exceclp");
     // puts("Après execve - pas affiché");
     return 0;
 }
