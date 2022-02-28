@@ -25,19 +25,18 @@ int main(int argc, char const *argv[])
             break;
         }
 
-        char testCd[2];
+        char testCd[3];
         testCd[0] = command[0];
         testCd[1] = command[1];
         testCd[2] = '\0';
 
-        if (!strcmp(testCd, "cd\n"))
+        if (!strcmp(testCd, "cd"))
         {
             if (chdir(getenv("HOME")))
                 printf("Error: cd command\n");
         }
         else
         {
-            printf("oui system");
             system(command);
         }
     }
