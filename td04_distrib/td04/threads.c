@@ -41,7 +41,6 @@ int main(int argc, char const *argv[])
     long retour;
     long retour2;
 
-
     pthread_create(&th, NULL, fn_thread, (void *) &n1);
     pthread_create(&th2, NULL, fn_thread, (void *) &n2);
 
