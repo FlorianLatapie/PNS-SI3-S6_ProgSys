@@ -29,9 +29,12 @@ int main()
     long i;
     pthread_t threads[MAX];
 
+    long numeroThread[MAX];
+
     /* Creation des threads */
     for (i = 0; i < MAX; i++) {
-        pthread_create(&threads[i], NULL, func, (void *)&i);
+        numeroThread[i] = i;
+        pthread_create(&threads[i], NULL, func, (void *)&numeroThread[i]);
         //sleep(1);		/* a enlever */
     }
 
