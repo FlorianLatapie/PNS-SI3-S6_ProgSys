@@ -68,7 +68,7 @@ static void * fn_joueurs(void * data)
         printf("Joueur %ld prend %d allumettes, reste %d allumettes\n", nb, val, jeu.allumettes);
 
         /* Le joueur attend 1 seconde avant de rejouer */
-        sleep(1);
+        //sleep(1);
     }
 
     return NULL;
