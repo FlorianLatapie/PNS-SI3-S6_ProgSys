@@ -22,7 +22,7 @@ void copy(const char* source, const char* destination){
 
 int main(int argc, char const *argv[])
 {
-    assert(argc>3);
+    assert(argc>=3);
 
     if (argc == 3){
         copy(argv[1], argv[2]);

@@ -1,12 +1,10 @@
+#ifndef _UTIL_H_
+#define _UTIL_H_
 /* ------------------------------------------------------------------------------------
  * Primitives de POSIX.1
  * ------------------------------------------------------------------------------------
  * Jean-Paul Rigault --- ESSI --- Mars 2005
  * d'après une correction d'Erick Gallesio (ESSI)
- * $Id: util.c,v 1.2 2008/04/21 18:08:09 jpr Exp $
- * ------------------------------------------------------------------------------------
- * Quelques fonctions utiles pour lsrec et copy
- * ------------------------------------------------------------------------------------
  */
 
 /*!
@@ -15,20 +13,26 @@
  * Quelques fonctions utiles pour \b lsrec et \b copy
  */
 
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <dirent.h>
-#include <string.h>
+#include <stdbool.h>
 
-#include "util.h"
+//! Le nom de fichier est-il celui d'un répertoire ?
+bool is_dir(const char *filename);
 
-bool is_dir(const char *filename)
-{
-    struct stat st;
-    return stat(filename, &st) ? 0 : S_ISDIR(st.st_mode);
-}
+//! Le nom de fichier est-il "." ou ".." ?
+bool is_dot_dir(const char *filename);
 
-bool is_dot_dir(const char *filename)
+//! Nom de base d'un fichier */
+const char *get_basename(const char *filename);
+
+//! Deux noms de fichiers désignent-ils le même fichier physique ?
+bool same_file(const char *fn1, const char *fn2);
+
+//! Tester l'existence d'un fichier
+bool file_exists(const char *filename);
+
+
+#endif // _UTIL_H_ 
+ename)
 {
     return (filename[0] == '.')
            && (filename[1] == '\0' || (filename[1] == '.' && filename[2] == '\0'));
