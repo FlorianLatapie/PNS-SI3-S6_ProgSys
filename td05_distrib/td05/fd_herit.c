@@ -4,6 +4,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include <sys/wait.h>
 
 
 int main(int argc, char const *argv[])

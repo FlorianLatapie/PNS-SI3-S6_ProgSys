@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "limits": "c",
-        "type_traits": "c"
+        "type_traits": "c",
+        "stat.h": "c"
     }
 }
