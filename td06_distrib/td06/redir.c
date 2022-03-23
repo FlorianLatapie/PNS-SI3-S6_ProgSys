@@ -12,6 +12,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include <string.h>
 
 void usage(char *progname)
 {
@@ -32,14 +33,19 @@ int main(int argc, char *argv[])
     switch (argv[1][0]) {
     case 'R':
     case 'r':
-        std_fd = 0;
+        std_fd = open(argv[2], O_RDONLY);
+        dup2(std_fd, STDIN_FILENO);
+        close(std_fd);
+        execvp(argv[3], argv + 3);
         break;
     case 'W':
     case 'w':
-        std_fd = 1;
+        std_fd = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC);
+        dup2(std_fd, STDOUT_FILENO);
+        close(std_fd);
+        execvp(argv[3], argv + 3); 
         break;
     default:
-        usage(*argv);
+        usage(argv); 
     }
-
 }
