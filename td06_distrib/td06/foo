@@ -1,0 +1,9 @@
+total 60
+-rw-r--r-- 1 user user     0 mars  23 09:43 foo
+-rw-rw-r-- 1 user user  2107 mars  24  2018 Makefile
+-rw-rw-r-- 1 user user   841 mars  28  2018 redir.c
+-rwxrwxr-x 1 user user 19768 mars  23 09:31 redir.exe
+-rw-rw-r-- 1 user user   297 mars  23 09:40 redir_simple.c
+-rwxrwxr-x 1 user user 19640 mars  23 09:40 redir_simple.exe
+-rw-rw-r-- 1 user user   531 mars  23  2017 tst_redir.sh
+drwxrwxr-x 6 user user  4096 mars  27  2017 Win32NamedPipe
