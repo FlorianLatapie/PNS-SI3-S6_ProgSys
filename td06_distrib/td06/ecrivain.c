@@ -27,11 +27,11 @@ int main(int argc, char const *argv[])
 {
     assert(argc == 2);
     
-    int fichier = open(argv[1], O_WRONLY, S_IRUSR|S_IWUSR|S_IRGRP|S_IROTH);
+    int descripteurFichier = open(argv[1], O_WRONLY, S_IRUSR|S_IWUSR|S_IRGRP|S_IROTH);
 
     char string[] = "abcdefghijklmnopqrstuvwxyz";
-    write(fichier, string, strlen(string));
-    close(fichier);
+    write(descripteurFichier, string, strlen(string));
+    close(descripteurFichier);
 
     return 0;
 }
