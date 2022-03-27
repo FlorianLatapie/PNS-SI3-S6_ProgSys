@@ -25,10 +25,9 @@ int main() {
         break;
     default:
         close(p[1]);
-        lecture(p[0]);
+        lecture(p[0]); 
         close(p[0]);
         break;
     }   
-
     return 0;
 }
