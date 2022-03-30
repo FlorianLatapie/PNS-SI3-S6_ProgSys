@@ -12,29 +12,28 @@ while (true) {} pendant laquelle vous aurez tout le loisir d’envoyer des SIGIN
 #include <stdio.h>
 #include <stdlib.h>
 
-static int nb_SIGSEGV = 0;
+static int nb_SIGINT = 0;
 
-void on_SIGSEGV(int sig)
+void on_signal(int sig)
 {
-    nb_SIGSEGV++;
-    printf("SIGSEGV %d\nnb_SIGSEGV = %d\n", sig, nb_SIGSEGV);
+    if (sig == SIGINT)
+    {
+        nb_SIGINT++;
+    }
 
-    if (nb_SIGSEGV == 5)
+    printf("signal %d\nnb_SIGINT = %d\n", sig, nb_SIGINT);
+
+    if (nb_SIGINT == 5)
     {
         exit(0);
     }
 }
 
-void on_SIGINT(int sig)
-{
-    printf("SIGINT %d\n", sig);
-}
-
 int main()
 {
-    nb_SIGSEGV = 0;
-    signal(SIGSEGV, on_SIGSEGV);
-    signal(SIGINT, on_SIGINT);
+    nb_SIGINT = 0;
+    signal(SIGSEGV, on_signal);
+    signal(SIGINT, on_signal);
     for (;;)
     {
     }
