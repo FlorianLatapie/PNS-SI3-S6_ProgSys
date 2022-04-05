@@ -6,29 +6,66 @@ Pour envoyer le signal kill, vous utiliserez la fonction Posix kill, bien entend
 commande Unix kill qui elle-même a été implémentée grâce à la fonction Posix kill).
 */
 #include <signal.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/types.h>
+#include <unistd.h>
+#include <sys/wait.h>
 
-int main(int argc, char const *argv[])
+static pid_t pidAine;
+static pid_t pidCadet;
+
+void cadet(int signal)
 {
-    int pid = fork();
-    if (pid == 0)
+    printf("Cadet : réception du signal SIGUSR1 (%d)\nEnvoi du signal SIGUSR2 au fils ainé\n", signal);
+    kill(pidAine, SIGUSR2);
+    printf("Cadet : fin du processus\n");
+    exit(0);
+}
+
+void aine(int signal)
+{
+    printf("Réception du signal SIGUSR2 (%d)\n", signal);
+    printf("Aine : fin du processus\n");
+    exit(0);
+}
+
+int main()
+{
+    struct sigaction sigact = {
+        .sa_handler = SIG_IGN};
+
+    pidAine = fork();
+
+    switch (pidAine)
     {
-        int pid2 = fork();
-        if (pid2 == 0)
-        {
-            kill(getppid(), SIGUSR2);
-            exit(0);
-        }
-        else
-        {
-            kill(pid2, SIGUSR1);
-            exit(0);
-        }
+    case -1:
+        perror("fork");
+        break;
+    case 0:
+        sigact.sa_handler = aine;
+        sigaction(SIGUSR2, &sigact, NULL);
+        while (1)
+            ;
     }
-    else
+
+    pidCadet = fork();
+    switch (pidCadet)
     {
-        int status;
-        wait(&status);
-        wait(&status);
+    case -1:
+        perror("fork");
+        break;
+    case 0:
+        sigact.sa_handler = cadet;
+        sigaction(SIGUSR1, &sigact, NULL);
+        while (1)
+            ;
     }
+    sleep(1);
+    printf("SIGUSR1 --> fils cadet\n");
+    kill(pidCadet, SIGUSR1);
+    wait(NULL);
+    wait(NULL);
+    printf("Fin du programme\n");
     return 0;
 }
