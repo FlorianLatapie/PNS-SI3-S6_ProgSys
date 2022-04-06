@@ -1,0 +1,21 @@
+#!/bin/bash
+#
+# Commande permettant de lancer villoc
+#
+#           Author: Erick Gallesio [eg@unice.fr]
+#    Creation date:  9-Apr-2020 10:00
+# Last file update: 16-Apr-2020 12:14 (lavirott)
+
+if test $# == 1 -a -e $1
+then
+    in=$1
+    out=$(basename $1 .exe).html
+else
+    echo >&2 "Usage: $0 <source file>.exe"
+    exit 1
+fi
+
+#ltrace -S -o /tmp/trace$$ ./${in}
+./${in} 2> /tmp/trace$$
+villoc/villoc.py --raw /tmp/trace$$ ${out} 
+rm -f /tmp/trace$$
