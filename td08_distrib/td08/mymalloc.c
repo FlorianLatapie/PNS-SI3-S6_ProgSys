@@ -133,8 +133,8 @@ static void *allocate_core(size_t size)
 
   // Libérer ce bloc (ceci afin de le remettre dans la liste des blocs libres)
   internal_free(new + 1);
-  
-  // Retourner le pointeur vers le premier élément de la nouvelle zone 
+
+  // Retourner le pointeur vers le premier élément de la nouvelle zone
   return freep;
 }
 
@@ -155,6 +155,42 @@ void internal_free(void *ptr)
   // Libère la zone pointée par ptr en l'insérant dans freep
   // Essai de coller les blocs adjacents à cette zone
   // NOTA : la liste freep est triée par ordre croissant des adresses
+
+  Header *bp, *p, *prevp;
+  if (!ptr)
+    return;                 // On peut appeller free avec NULL. Ne rien faire dans ce cas
+  bp = ((Header *)ptr) - 1; // Ajuster bp sur le debut du bloc
+
+  /* rechercher le block à supprimer */
+  prevp = freep;
+  p = NEXT(freep);
+  while (NEXT(prevp) != freep && p <= bp)
+  {
+    prevp = p;
+    p = NEXT(p);
+  }
+
+  /* Essayer de "coller" ce bloc au suivant */
+  if (bp + SIZE(bp) == p)
+  {
+    SIZE(bp) += SIZE(p);
+    NEXT(bp) = NEXT(p);
+  }
+  else
+  {
+    NEXT(bp) = p;
+  }
+
+  /* Essayer de "coller" ce bloc au precedent */
+  if (prevp + SIZE(prevp) == bp)
+  {
+    SIZE(prevp) += SIZE(bp);
+    NEXT(prevp) = NEXT(bp);
+  }
+  else
+  {
+    NEXT(prevp) = bp;
+  }
 }
 
 /* ====================================================================== */
