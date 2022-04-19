@@ -142,16 +142,46 @@ static void *allocate_core(size_t size)
 
 void *internal_malloc(size_t size)
 {
-  // A COMPLETER
   // fait un appel à allocate_core si pas de place dans la liste freep
-  return NULL;
+  size_t blocksToAllocate = BLOCKS_TO_ALLOCATE(size);
+  Header *prevp = freep;
+  Header *p = freep;
+
+  // On cherche un bloc libre suffisamment grand
+  while (p != NULL && SIZE(p) < blocksToAllocate)
+  {
+    Header *newPrevp = p;
+    p = NEXT(p);
+
+    if (p == freep)
+    {
+      size_t eblocks = blocksToAllocate < MIN_ALLOCATION ? MIN_ALLOCATION : blocksToAllocate;
+      p = allocate_core(eblocks);
+      break;
+    }
+
+    prevp = newPrevp;
+  }
+
+  if (SIZE(p) == blocksToAllocate)
+  {
+    NEXT(prevp) = NEXT(p);
+  }
+  else
+  {
+    Header *next = p + blocksToAllocate;
+    NEXT(next) = NEXT(p);
+    SIZE(next) = SIZE(p) - blocksToAllocate;
+    SIZE(p) = blocksToAllocate;
+    NEXT(prevp) = next;
+  }
+  return p + 1;
 }
 
 /* ====================================================================== */
 
 void internal_free(void *ptr)
 {
-  // A COMPLETER
   // Libère la zone pointée par ptr en l'insérant dans freep
   // Essai de coller les blocs adjacents à cette zone
   // NOTA : la liste freep est triée par ordre croissant des adresses
@@ -197,13 +227,17 @@ void internal_free(void *ptr)
 
 void *internal_calloc(size_t nmemb, size_t size)
 {
-  // A COMPLETER
   // Utilise internal_malloc
+  void *ptr = internal_malloc(nmemb * size);
+  if (ptr)
+  {
+    memset(ptr, 0, nmemb * size);
+  }
+  return ptr;
 }
 
 void *internal_realloc(void *ptr, size_t size)
 {
-  // A COMPLETER
   // utilise internal_free et internal_malloc
   return ptr;
 }
