@@ -47,6 +47,14 @@ JNIEXPORT void JNICALL Java_HelloWorld_callJavaMethod
 JNIEXPORT jstring JNICALL Java_HelloWorld_toString
   (JNIEnv *, jobject);
 
+/*
+ * Class:     HelloWorld
+ * Method:    fib
+ * Signature: (I)I
+ */
+JNIEXPORT jint JNICALL Java_HelloWorld_fib
+  (JNIEnv *, jclass, jint);
+
 #ifdef __cplusplus
 }
 #endif

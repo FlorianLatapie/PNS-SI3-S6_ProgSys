@@ -8,6 +8,7 @@ public class HelloWorld {
     public native void callJavaMethod();
     @Override
     public native String toString();
+    public static native int fib(int n);
 
     // Chargement du fichier .so
     static {
@@ -15,7 +16,7 @@ public class HelloWorld {
     }
 
     // Méthodes Java
-    int entier = 10;
+    int entier = 10 ;
 
     public static void test(String entree){
         System.out.println("Méthode test : " + entree);
@@ -37,5 +38,8 @@ public class HelloWorld {
 
         System.out.println("\nExo 5 :");
         System.out.println(hw.toString());
+
+        System.out.println("\nExo 6 :");
+        System.out.println(HelloWorld.fib(10));
     }
 }

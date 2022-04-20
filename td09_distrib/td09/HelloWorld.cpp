@@ -64,3 +64,17 @@ Java_HelloWorld_toString(JNIEnv *env, jobject obj)
     // On retourne un objet Java de chaîne de caractères
     return env->NewStringUTF(buffer);
 }
+
+static int fib(int n)
+{
+    if (n < 2)
+        return n;
+    else
+        return fib(n - 1) + fib(n - 2);
+}
+
+JNIEXPORT jint JNICALL
+Java_HelloWorld_fib(JNIEnv *env, jclass cl, jint n)
+{
+   return(fib(n));
+}
