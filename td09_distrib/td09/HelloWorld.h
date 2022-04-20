@@ -29,7 +29,7 @@ JNIEXPORT void JNICALL Java_HelloWorld_printStringToCpp
  * Signature: ()Ljava/lang/String;
  */
 JNIEXPORT jstring JNICALL Java_HelloWorld_stringFromCpp
-  (JNIEnv *, jclass);
+  (JNIEnv *, jobject);
 
 #ifdef __cplusplus
 }

@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class HelloWorld {
     public static native void printCpp(); // Déclaration prototype méthode native
     public static native void printStringToCpp(String str); 
-    public static native String stringFromCpp();
+    public native String stringFromCpp();
 
     static {
         System.loadLibrary("HelloWorld"); // Chargement de la bibliothèque
@@ -15,6 +15,7 @@ public class HelloWorld {
         
         System.out.println("\n\nExo 3 :");
         printStringToCpp("printStringToCpp");
-        System.out.println("string from cpp : " + HelloWorld.stringFromCpp());
+        HelloWorld hw = new HelloWorld();
+        System.out.println("string from cpp : " + hw.stringFromCpp());
     }
 }
