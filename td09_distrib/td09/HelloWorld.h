@@ -31,6 +31,14 @@ JNIEXPORT void JNICALL Java_HelloWorld_printStringToCpp
 JNIEXPORT jstring JNICALL Java_HelloWorld_stringFromCpp
   (JNIEnv *, jobject);
 
+/*
+ * Class:     HelloWorld
+ * Method:    callJavaMethod
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_HelloWorld_callJavaMethod
+  (JNIEnv *, jobject);
+
 #ifdef __cplusplus
 }
 #endif
