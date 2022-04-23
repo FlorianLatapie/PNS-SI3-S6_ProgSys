@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 public class HelloWorld {
     // Méthodes natives
     public static native void printCpp(); // Déclaration prototype méthode native
