@@ -2,7 +2,7 @@
 #  Makefile 	-- Makefile du répertoire lib du Td10
 #
 
-JAVA_H=/usr/lib/jvm/jdk-11.0.7
+JAVA_H=/usr/lib/jvm/java-17-openjdk-amd64/
 CC=g++
 CXXFLAGS=-fpic -Wall  -I$(JAVA_H)/include/ -I$(JAVA_H)/include/linux
 

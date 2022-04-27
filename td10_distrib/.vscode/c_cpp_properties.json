@@ -37,8 +37,8 @@
                 "/usr/local/include",
                 "/usr/include/x86_64-linux-gnu",
                 "/usr/include",
-                "/usr/lib/jvm/java-11-openjdk-amd64/include",
-                "/usr/lib/jvm/java-11-openjdk-amd64/include/linux"
+                "/usr/lib/jvm/java-17-openjdk-amd64/include",
+                "/usr/lib/jvm/java-17-openjdk-amd64/include/linux"
             ],
             "defines": [],
             "intelliSenseMode": "clang-x64",
@@ -52,8 +52,8 @@
                     "/usr/local/include",
                     "/usr/include/x86_64-linux-gnu",
                     "/usr/include",
-                    "/usr/lib/jvm/java-11-openjdk-amd64/include",
-                    "/usr/lib/jvm/java-11-openjdk-amd64/include/linux"
+                    "/usr/lib/jvm/java-17-openjdk-amd64/include",
+                    "/usr/lib/jvm/java-17-openjdk-amd64/include/linux"
                    ],
                 "limitSymbolsToIncludedHeaders": true,
                 "databaseFilename": ""

@@ -15,7 +15,7 @@ INC=$(filter-out $(LIBDIR)/exo1.h, \
 
 # ----------------------------------------------------------------------
 # Code C/C++
-JAVA_H=/usr/lib/jvm/jdk-11.0.7/
+JAVA_H=/usr/lib/jvm/java-17-openjdk-amd64/
 CPP=g++
 CXXFLAGS= -Wall  -I$(JAVA_H)/include/ \
           -I$(JAVA_H)/include/linux \
